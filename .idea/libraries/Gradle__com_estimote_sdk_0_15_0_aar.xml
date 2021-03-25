@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.estimote:sdk:0.15.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ab9399f37ad1cd1f4f59544b9de09598/jetified-sdk-0.15.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ab9399f37ad1cd1f4f59544b9de09598/jetified-sdk-0.15.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ab9399f37ad1cd1f4f59544b9de09598/jetified-sdk-0.15.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.estimote/sdk/0.15.0/dcbd8476d3cbc3ea7c6f964d5bfe218363d2ddd2/sdk-0.15.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
