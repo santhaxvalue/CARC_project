@@ -45,6 +45,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -173,9 +174,14 @@ public class LocationTrack extends Service implements LocationListener {
                 Log.d("locationDetailsNew:","locationDetailsNew:"+ "Date/Time: "+ dateone + " AppState: "+appstate+" Latitude: "+lat+" Longitude: "+longi);
 
 
+                // Check if we're running on Android 5.0 or higher
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                    writeToFile(dateone, appstate, lat, longi);
+                } else {
+                    generateNoteOnSD(LocationTrack.this,"carclogfile",lat,longi,dateone,appstate);
+                }
 
-                generateNoteOnSD(LocationTrack.this,"carclogfile",lat,longi,dateone,appstate);
-                
+
                 MainActivity.iawMain.setLatitude(lat);
                 MainActivity.iawMain.setLongitude(longi);
                 if (callbackMethod != null) {
@@ -213,6 +219,16 @@ public class LocationTrack extends Service implements LocationListener {
 
     }
 
+    private void writeToFile(String dateonestr, String appstatestr, String latstr, String longistr) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("latlng_report.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write("Date/Time: "+ dateonestr + " AppState: "+appstatestr+" Latitude: "+latstr+" Longitude: "+longistr);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
     public void startTracking(int accuracy, String callbackMethod) {
         if (accuracy == 0) {
             accuracy = LocationRequest.PRIORITY_HIGH_ACCURACY;
