@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.Settings;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
 
@@ -38,6 +40,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import firebase.NotificationUtils;
 import services.LocationUpdatesIntentService;
@@ -174,12 +178,29 @@ public class LocationTrack extends Service implements LocationListener {
                 Log.d("locationDetailsNew:","locationDetailsNew:"+ "Date/Time: "+ dateone + " AppState: "+appstate+" Latitude: "+lat+" Longitude: "+longi);
 
 
+                //old code working fine in lower device
                 // Check if we're running on Android 5.0 or higher
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                    writeToFile(dateone, appstate, lat, longi);
-                } else {
+//                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//                    writeToFile(dateone, appstate, lat, longi);
+//                } else {
+//                    generateNoteOnSD(LocationTrack.this,"carclogfile",lat,longi,dateone,appstate);
+//                }
+                //old code working fine in lower device
+
+                //new code
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//
+//                    boolean status = checkWriteExternalPermission();
+//
+//                    Toast.makeText(mContext, "Status : Status : Status ", Toast.LENGTH_SHORT).show();
+//
+                        saveToTextFile(lat,longi,dateone,appstate);
+//
+//
+                }else {
                     generateNoteOnSD(LocationTrack.this,"carclogfile",lat,longi,dateone,appstate);
                 }
+                //new code
 
 
                 MainActivity.iawMain.setLatitude(lat);
@@ -188,6 +209,7 @@ public class LocationTrack extends Service implements LocationListener {
                     Sipdroid.loadURL("javascript:" + callbackMethod + "('" + lat + "'" + "," + "'" + longi + "'" + "," + "'" + locatTime + "')");
                 }
             }
+
 
 
 
@@ -214,14 +236,60 @@ public class LocationTrack extends Service implements LocationListener {
                 }
             }
 
+            private void saveToTextFile(String latitude, String longitude, String date, String appstatus) {
+
+                //get current time for file name
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
+
+                try{
+
+
+                    //path tp storage
+//            File path = Environment.getExternalStorageDirectory();
+
+                    String path = mContext.getExternalFilesDir(null).getAbsolutePath();
+
+
+                    //create folder named "My Files"
+                    File dir = new File(path + "/Carc-App/");
+                    dir.mkdirs();
+                    //file name
+                    String filename = "MyFile_" + timestamp + ".txt"; // e.g MyFile_20210615_23445.txt
+
+                    File file = new File(dir, filename);
+
+                    //FileWriter class is used to store characters in file
+                    FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write("Date/Time: "+ date + " AppState: "+appstatus+" Latitude: "+latitude+" Longitude: "+longitude);
+                    bw.close();
+
+                    //show file name and path where file is saved
+//                    Toast.makeText(mContext, filename+" is saved to\n" +dir, Toast.LENGTH_SHORT).show();
+
+
+                }catch (Exception e){
+                    //if anything goes wrong
+                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
 
         };
 
     }
 
+    private boolean checkWriteExternalPermission()
+    {
+        String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int res = mContext.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
     private void writeToFile(String dateonestr, String appstatestr, String latstr, String longistr) {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("latlng_report.txt", Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(mContext.openFileOutput("latlng_report.txt", Context.MODE_PRIVATE));
             outputStreamWriter.write("Date/Time: "+ dateonestr + " AppState: "+appstatestr+" Latitude: "+latstr+" Longitude: "+longistr);
             outputStreamWriter.close();
         }
@@ -631,6 +699,7 @@ public class LocationTrack extends Service implements LocationListener {
             setCurLatitude(latitude);
             setCurLongitude(longitude);
             setCurLocTime(location.getTime());
+
 //            if (isFirstTime()){
 //                lastLat = lastSpanLat = latitude;
 //                lastLon = lastSpanLon = longitude;
@@ -672,6 +741,7 @@ public class LocationTrack extends Service implements LocationListener {
 //            }
 
 //            Sipdroid.loadURL("javascript:onLocationUpdate('" + latitude + "'" + "," + "'" + longitude + "'" + "," + "'" + location.getTime() + "')");
+
         }
     }
 
@@ -711,6 +781,8 @@ public class LocationTrack extends Service implements LocationListener {
             setTimeStopped(timer);
         }
     }
+
+
 
 }
 

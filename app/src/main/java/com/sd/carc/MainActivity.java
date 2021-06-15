@@ -81,6 +81,7 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
 //    public static final String MIXPANEL_TOKEN = "32dbbec024a9c8bbd5ad0eed5e6d6ffe";
 //    MixpanelAPI mixpanel;
 
+//    private static final int WRITE_EXTERNAL_STORAGE_CODE = 1;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -113,8 +114,18 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
         permissionsToRequest = findUnAskedPermissions(permissions);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (permissionsToRequest.size() > 0)
+            if (permissionsToRequest.size() > 0) {
                 requestPermissions((String[]) permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+            }
+
+            //new code
+//            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
+//                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+//                //show popup for runtime permission
+//                requestPermissions(permissions,WRITE_EXTERNAL_STORAGE_CODE);
+//            }
+            //new code
+
         }
     }
 
@@ -561,6 +572,23 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
                 }
 
                 break;
+
+
+                //new code
+//            case WRITE_EXTERNAL_STORAGE_CODE:
+//
+//                //if request is cancelled, the result arrays are empty
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//
+//                } else {
+//                    //permission was denied, show toast
+//                    Toast.makeText(this, "Storage permission is required to store data", Toast.LENGTH_SHORT).show();
+//                }
+//
+//
+//            break;
+            //new code
+
         }
 
     }
