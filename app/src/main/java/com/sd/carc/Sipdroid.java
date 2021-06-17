@@ -76,8 +76,42 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+//import com.pubnub.api.PNConfiguration;
+//import com.pubnub.api.PubNub;
+//import com.pubnub.api.callbacks.PNCallback;
+//import com.pubnub.api.callbacks.SubscribeCallback;
+//import com.pubnub.api.enums.PNStatusCategory;
+//import com.pubnub.api.models.consumer.PNPublishResult;
+//import com.pubnub.api.models.consumer.PNStatus;
+//import com.pubnub.api.models.consumer.objects_api.channel.PNChannelMetadataResult;
+//import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+//import com.pubnub.api.models.consumer.objects_api.uuid.PNUUIDMetadataResult;
+//import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+//import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+//import com.pubnub.api.models.consumer.pubsub.PNSignalResult;
+//import com.pubnub.api.models.consumer.pubsub.files.PNFileEventResult;
+//import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResult;
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.callbacks.PNCallback;
+import com.pubnub.api.callbacks.SubscribeCallback;
+import com.pubnub.api.enums.PNStatusCategory;
+import com.pubnub.api.models.consumer.PNPublishResult;
+import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.objects_api.channel.PNChannelMetadataResult;
+import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+import com.pubnub.api.models.consumer.objects_api.uuid.PNUUIDMetadataResult;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+import com.pubnub.api.models.consumer.pubsub.PNSignalResult;
+import com.pubnub.api.models.consumer.pubsub.files.PNFileEventResult;
+import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResult;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -196,6 +230,7 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 555;
     private long locUpdateFrequency = 0;
+
 
     //String ua = "Mozilla/5.0 (Android; Tablet; rv:20.0) Gecko/20.0 Firefox/20.0";
 
@@ -1121,6 +1156,21 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         public WebAppInterface() {
         }
 
+
+
+        @JavascriptInterface
+        public void publishPubNub(String userId,String publishKey,String subscribeKey) {
+            Log.e("publishPubNub:", "publishPubNub:" + userId +" : "+publishKey+" : "+subscribeKey);
+
+            String userIdstr = userId;
+            String publishKeystr = publishKey;
+            String subscribeKeystr = subscribeKey;
+
+            pubNubPublishMethod(userIdstr,publishKeystr,subscribeKeystr);
+
+        }
+
+
         @JavascriptInterface
         public void startAppNormal(boolean flag) {
             Log.e("appnormal", "" + flag);
@@ -1140,6 +1190,8 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             editor.putString("USER_DETAILS", userDetails);
             editor.commit();
         }
+
+
 
         @JavascriptInterface
         public void toggleDisableBack(boolean flag) {
@@ -1779,6 +1831,7 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         @JavascriptInterface
         public void setFrequency(String frequency, String accuracy, String callbackMethod) {
             printText("setLocTrkg is Called!" +  frequency+":"+ callbackMethod);
+            Log.d("setLocTrkg is Called!:","setLocTrakg is Called!:"+ frequency+": "+callbackMethod);
             int accuracyInt = 0;
 //            long interval = Long.parseLong(frequency);
             long interval = 10000;  // 60000
@@ -1858,6 +1911,154 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
                 Log.i("Exception on stopping geofence", securityException.toString());
             }
         }
+    }
+
+    private void pubNubPublishMethod(String userId,String publishKey,String subscribeKey) {
+
+
+        PNConfiguration pnConfiguration = new PNConfiguration();
+
+        //old code
+//            pnConfiguration.setSubscribeKey("sub-c-add539c0-88d5-11eb-99bb-ce4b510ebf19");
+//            pnConfiguration.setPublishKey("pub-c-c47ce208-b259-43ee-8c55-94c4ec0beee9");
+//            pnConfiguration.setUuid("carc1");
+
+        //new code
+        pnConfiguration.setSubscribeKey(subscribeKey);
+        pnConfiguration.setPublishKey(publishKey);
+        pnConfiguration.setUuid(userId);
+
+        PubNub pubnub = new PubNub(pnConfiguration);
+
+        //old code
+//            String channelName = "carc1";
+        //new code
+        final String channelName = userId;
+
+        // create message payload using Gson
+        final JsonObject messageJsonObject = new JsonObject();
+        messageJsonObject.addProperty("userId", userId);
+        messageJsonObject.addProperty("publishKey", publishKey);
+        messageJsonObject.addProperty("subscribeKey", subscribeKey);
+
+//        Log.d("Message to send: ","Message to send: " + messageJsonObject.toString());
+        Log.d("javascript:onLocationUpdate4:pubnub ","javascript:onLocationUpdate4:pubnub " + messageJsonObject.toString());
+
+
+
+        pubnub.addListener(new SubscribeCallback() {
+            @Override
+            public void status(PubNub pubnub, PNStatus status) {
+
+                if (status.getCategory() == PNStatusCategory.PNUnexpectedDisconnectCategory) {
+                    // This event happens when radio / connectivity is lost
+                }
+
+                else if (status.getCategory() == PNStatusCategory.PNConnectedCategory) {
+
+                    // Connect event. You can do stuff like publish, and know you'll get it.
+                    // Or just use the connected event to confirm you are subscribed for
+                    // UI / internal notifications, etc
+
+                    if (status.getCategory() == PNStatusCategory.PNConnectedCategory){
+                        pubnub.publish().channel(channelName).message(messageJsonObject).async(new PNCallback<PNPublishResult>() {
+                            @Override
+                            public void onResponse(PNPublishResult result, PNStatus status) {
+                                // Check whether request successfully completed or not.
+                                if (!status.isError()) {
+
+                                    // Message successfully published to specified channel.
+                                }
+                                // Request processing failed.
+                                else {
+
+                                    // Handle message publish error. Check 'category' property to find out possible issue
+                                    // because of which request did fail.
+                                    //
+                                    // Request can be resent using: [status retry];
+                                }
+                            }
+                        });
+                    }
+                }
+                else if (status.getCategory() == PNStatusCategory.PNReconnectedCategory) {
+
+                    // Happens as part of our regular operation. This event happens when
+                    // radio / connectivity is lost, then regained.
+                }
+                else if (status.getCategory() == PNStatusCategory.PNDecryptionErrorCategory) {
+
+                    // Handle messsage decryption error. Probably client configured to
+                    // encrypt messages and on live data feed it received plain text.
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void message(PubNub pubnub, PNMessageResult message) {
+                // Handle new message stored in message.message
+                if (message.getChannel() != null) {
+                    // Message has been received on channel group stored in
+                    // message.getChannel()
+                }
+                else {
+                    // Message has been received on channel stored in
+                    // message.getSubscription()
+                }
+
+                JsonElement receivedMessageObject = message.getMessage();
+                Log.d("Receivedmessage content:","Received message content: " + receivedMessageObject.toString());
+                // extract desired parts of the payload, using Gson
+                String msg = message.getMessage().getAsJsonObject().get("msg").getAsString();
+                Log.d("msg content: ","msg content: " + msg);
+
+            /*
+                log the following items with your favorite logger
+                    - message.getMessage()
+                    - message.getSubscription()
+                    - message.getTimetoken()
+            */
+            }
+
+            @Override
+            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+
+            }
+
+            @Override
+            public void signal(PubNub pubnub, PNSignalResult pnSignalResult) {
+
+            }
+
+            @Override
+            public void uuid(PubNub pubnub, PNUUIDMetadataResult pnUUIDMetadataResult) {
+
+            }
+
+            @Override
+            public void channel(PubNub pubnub, PNChannelMetadataResult pnChannelMetadataResult) {
+
+            }
+
+            @Override
+            public void membership(PubNub pubnub, PNMembershipResult pnMembershipResult) {
+
+            }
+
+            @Override
+            public void messageAction(PubNub pubnub, PNMessageActionResult pnMessageActionResult) {
+
+            }
+
+            @Override
+            public void file(PubNub pubnub, PNFileEventResult pnFileEventResult) {
+
+            }
+        });
+
+        pubnub.subscribe().channels(Arrays.asList(channelName)).execute();
+
+
     }
 
     /********** NFC Related Methods ***********/
@@ -2325,6 +2526,7 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
                 browser.post(new Runnable() {
                     public void run() {
                         System.out.println("Load url" + urlToLoad);
+                        Log.d("Load url888:","Load url888:" + urlToLoad);
                         browser.loadUrl(urlToLoad);
                     }
                 });

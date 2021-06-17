@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -82,6 +84,9 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
 //    MixpanelAPI mixpanel;
 
 //    private static final int WRITE_EXTERNAL_STORAGE_CODE = 1;
+
+    double latitude;
+    double longitude;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -600,6 +605,61 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
             locationTrack.stopListener();
         }
     }
+
+//    @Override
+//    public void onLocationChanged(Location location) {
+//        if (location != null) {
+////            location.setSpeed(0.0f);
+//            latitude = location.getLatitude();
+//            longitude = location.getLongitude();
+////            setCurLatitude(latitude);
+////            setCurLongitude(longitude);
+////            setCurLocTime(location.getTime());
+//
+////            if (isFirstTime()){
+////                lastLat = lastSpanLat = latitude;
+////                lastLon = lastSpanLon = longitude;
+////                setFirstTime(false);
+////            }
+////
+////            lastlocation.setLatitude(lastLat);
+////            lastlocation.setLongitude(lastLon);
+////            double distance = lastlocation.distanceTo(location);
+////            if (location.getAccuracy() < distance){
+////                lastLat = latitude;
+////                lastLon = longitude;
+////            }
+////
+////            double speed = distance/(location.getTime() - lastlocation.getTime());
+////            System.out.println(location.getTime() - lastlocation.getTime());
+////
+////            //if there is speed from location
+////
+////            lastlocation.setTime(location.getTime());
+////            setCurSpeed(speed);
+////
+////            curCount ++;
+////
+////            if(curCount == (int) (MIN_TIME_BW_SPAN_SPEED / MIN_TIME_BW_UPDATES)){
+////                lastSpanlocation.setLatitude(lastSpanLat);
+////                lastSpanlocation.setLongitude(lastSpanLon);
+////                distance = lastSpanlocation.distanceTo(location);
+////                if (location.getAccuracy() < distance){
+////                    lastSpanLat = latitude;
+////                    lastSpanLon = longitude;
+////                }
+////                speed = distance/(location.getTime() - lastSpanlocation.getTime());
+////
+////                setPrevSpanSpeed(speed);
+////                lastSpanlocation.setTime(location.getTime());
+////
+////                curCount = 0;
+////            }
+//
+//            Sipdroid.loadURL("javascript:onLocationUpdate2:('" + latitude + "'" + "," + "'" + longitude + "'" + "," + "'" + location.getTime() + "')");
+//
+//        }
+//    }
 
     enum AppStatus {
         appStarted, appEntersForeground, appEntersBackground, appClosed

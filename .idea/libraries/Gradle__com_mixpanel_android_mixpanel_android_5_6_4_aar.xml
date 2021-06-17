@@ -1,20 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.mixpanel.android:mixpanel-android:5.6.4@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57d2fc5fb193c2d8e9cb6ae1b7c1d305/jetified-mixpanel-android-5.6.4/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3ae4f47b960a91639ba228bc06a03993/jetified-mixpanel-android-5.6.4/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/85ea1acbe7a6593d5fbf359f92bf290b/jetified-mixpanel-android-5.6.4/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57d2fc5fb193c2d8e9cb6ae1b7c1d305/jetified-mixpanel-android-5.6.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57d2fc5fb193c2d8e9cb6ae1b7c1d305/jetified-mixpanel-android-5.6.4/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57d2fc5fb193c2d8e9cb6ae1b7c1d305/jetified-mixpanel-android-5.6.4/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3ae4f47b960a91639ba228bc06a03993/jetified-mixpanel-android-5.6.4/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3ae4f47b960a91639ba228bc06a03993/jetified-mixpanel-android-5.6.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3ae4f47b960a91639ba228bc06a03993/jetified-mixpanel-android-5.6.4/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/85ea1acbe7a6593d5fbf359f92bf290b/jetified-mixpanel-android-5.6.4/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/85ea1acbe7a6593d5fbf359f92bf290b/jetified-mixpanel-android-5.6.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/85ea1acbe7a6593d5fbf359f92bf290b/jetified-mixpanel-android-5.6.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/85ea1acbe7a6593d5fbf359f92bf290b/jetified-mixpanel-android-5.6.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mixpanel.android/mixpanel-android/5.6.4/cbce95a85beec878bd3cddd21b6e6561cc5e0d21/mixpanel-android-5.6.4-javadoc.jar!/" />

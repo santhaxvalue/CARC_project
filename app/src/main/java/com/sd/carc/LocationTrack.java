@@ -194,26 +194,28 @@ public class LocationTrack extends Service implements LocationListener {
 //
 //                    Toast.makeText(mContext, "Status : Status : Status ", Toast.LENGTH_SHORT).show();
 //
-                        saveToTextFile(lat,longi,dateone,appstate);
+                        saveToTextFile(lat,longi,dateone,appstate,locatTime);
 //
 //
                 }else {
-                    generateNoteOnSD(LocationTrack.this,"carclogfile",lat,longi,dateone,appstate);
+                    generateNoteOnSD(LocationTrack.this,"carclogfile",lat,longi,dateone,appstate,locatTime);
                 }
                 //new code
 
 
-                MainActivity.iawMain.setLatitude(lat);
-                MainActivity.iawMain.setLongitude(longi);
-                if (callbackMethod != null) {
-                    Sipdroid.loadURL("javascript:" + callbackMethod + "('" + lat + "'" + "," + "'" + longi + "'" + "," + "'" + locatTime + "')");
-                }
+                //old code
+//                MainActivity.iawMain.setLatitude(lat);
+//                MainActivity.iawMain.setLongitude(longi);
+//                if (callbackMethod != null) {
+//                    Sipdroid.loadURL("javascript123:" + callbackMethod + "('" + lat + "'" + "," + "'" + longi + "'" + "," + "'" + locatTime + "')");
+//                }
+                //old code
             }
 
 
 
 
-            public void generateNoteOnSD(Context context, String sFileName, String latitude, String longitude, String date, String appstatus) {
+            public void generateNoteOnSD(Context context, String sFileName, String latitude, String longitude, String date, String appstatus, String timestr) {
                 try {
                     File root = new File(Environment.getExternalStorageDirectory(), "Carc-App");
                     if (!root.exists()) {
@@ -224,6 +226,13 @@ public class LocationTrack extends Service implements LocationListener {
                     writer.append("Date/Time: "+ date + " AppState: "+appstatus+" Latitude: "+latitude+" Longitude: "+longitude).append("\n");
                     writer.flush();
                     writer.close();
+
+                    MainActivity.iawMain.setLatitude(latitude);
+                    MainActivity.iawMain.setLongitude(longitude);
+                    if (callbackMethod != null) {
+                        Sipdroid.loadURL("javascript:onLocationUpdate3:" + callbackMethod + "('" + latitude + "'" + "," + "'" + longitude + "'" + "," + "'" + timestr + "')");
+                    }
+
 //                    list.add(sBody);
 //                    for(int i=0;i<list.size();i++) {
 //                        writer.append(list.get(i)).append("\n");
@@ -236,7 +245,7 @@ public class LocationTrack extends Service implements LocationListener {
                 }
             }
 
-            private void saveToTextFile(String latitude, String longitude, String date, String appstatus) {
+            private void saveToTextFile(String latitude, String longitude, String date, String appstatus,String timestr) {
 
                 //get current time for file name
                 String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis());
@@ -266,6 +275,12 @@ public class LocationTrack extends Service implements LocationListener {
 
                     //show file name and path where file is saved
 //                    Toast.makeText(mContext, filename+" is saved to\n" +dir, Toast.LENGTH_SHORT).show();
+
+                    MainActivity.iawMain.setLatitude(latitude);
+                    MainActivity.iawMain.setLongitude(longitude);
+                    if (callbackMethod != null) {
+                        Sipdroid.loadURL("javascript:onLocationUpdate4:" + callbackMethod + "('" + latitude + "'" + "," + "'" + longitude + "'" + "," + "'" + timestr + "')");
+                    }
 
 
                 }catch (Exception e){
@@ -313,6 +328,7 @@ public class LocationTrack extends Service implements LocationListener {
         }
         setLocationRequest(updateInterval, updateInterval, accuracy);
         locRequests += 1;
+        Log.d("callbackmethod1:","callbackmethod1:"+callbackMethod);
         this.callbackMethod = callbackMethod;
         requestLocationUpdates();
     }
@@ -740,7 +756,7 @@ public class LocationTrack extends Service implements LocationListener {
 //                curCount = 0;
 //            }
 
-//            Sipdroid.loadURL("javascript:onLocationUpdate('" + latitude + "'" + "," + "'" + longitude + "'" + "," + "'" + location.getTime() + "')");
+            Sipdroid.loadURL("javascript:onLocationUpdate1:('" + latitude + "'" + "," + "'" + longitude + "'" + "," + "'" + location.getTime() + "')");
 
         }
     }
