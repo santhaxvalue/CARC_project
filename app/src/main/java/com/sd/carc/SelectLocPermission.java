@@ -29,7 +29,7 @@ public class SelectLocPermission extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
 
-                        Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
 
                         SelectLocPermission.this.finish();
 
