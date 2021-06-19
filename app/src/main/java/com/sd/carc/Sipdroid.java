@@ -43,7 +43,10 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.provider.Telephony;
 import android.speech.tts.TextToSpeech;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -60,6 +63,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -239,6 +243,8 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         super.onStart();
     }
 
+
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -378,6 +384,9 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         }
     }
 
+
+
+
     private void registerSmsReceiver() {
         SMSReceiver smsReceiver = new SMSReceiver();
         if (!isReceiverRegistered) {
@@ -394,6 +403,8 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             }
         }
     }
+
+
 
     private void unregisterSmsReceiver() {
         SMSReceiver smsReceiver = new SMSReceiver();
@@ -1930,19 +1941,23 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
 
         PubNub pubnub = new PubNub(pnConfiguration);
 
-        //old code
-//            String channelName = "carc1";
-        //new code
+
         final String channelName = userId;
 
         // create message payload using Gson
         final JsonObject messageJsonObject = new JsonObject();
-        messageJsonObject.addProperty("userId", userId);
-        messageJsonObject.addProperty("publishKey", publishKey);
-        messageJsonObject.addProperty("subscribeKey", subscribeKey);
+//        messageJsonObject.addProperty("userId", userId);
+//        messageJsonObject.addProperty("publishKey", publishKey);
+//        messageJsonObject.addProperty("subscribeKey", subscribeKey);
+
+        float latflo = Float.parseFloat(MainActivity.iawMain.getLatitude());
+        float lngflo = Float.parseFloat(MainActivity.iawMain.getLongitude());
+
+        messageJsonObject.addProperty("lat", latflo);
+        messageJsonObject.addProperty("lng", lngflo);
 
 //        Log.d("Message to send: ","Message to send: " + messageJsonObject.toString());
-        Log.d("javascript:onLocationUpdate4:pubnub ","javascript:onLocationUpdate4:pubnub " + messageJsonObject.toString());
+        Log.d("javascript:onLocationUpdate4:","javascript:onLocationUpdate4:pubnub " + messageJsonObject.toString());
 
 
 
@@ -1965,12 +1980,19 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
                             @Override
                             public void onResponse(PNPublishResult result, PNStatus status) {
                                 // Check whether request successfully completed or not.
-                                if (!status.isError()) {
+                                if (status.isError()) {
+
+//                                    Toast.makeText(Sipdroid.this, "Data not added in PubNub", Toast.LENGTH_SHORT).show();
+                                    Log.d("Data_not_added:","Data_not_added:");
 
                                     // Message successfully published to specified channel.
                                 }
                                 // Request processing failed.
                                 else {
+
+//                                    Toast.makeText(Sipdroid.this, "Data successfully added in PubNub", Toast.LENGTH_SHORT).show();
+                                    Log.d("Data_added:","Data_added:");
+
 
                                     // Handle message publish error. Check 'category' property to find out possible issue
                                     // because of which request did fail.
@@ -2009,8 +2031,8 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
                 JsonElement receivedMessageObject = message.getMessage();
                 Log.d("Receivedmessage content:","Received message content: " + receivedMessageObject.toString());
                 // extract desired parts of the payload, using Gson
-                String msg = message.getMessage().getAsJsonObject().get("msg").getAsString();
-                Log.d("msg content: ","msg content: " + msg);
+//                String msg = message.getMessage().getAsJsonObject().get("msg").getAsString();
+//                Log.d("msg content: ","msg content: " + msg);
 
             /*
                 log the following items with your favorite logger
@@ -2582,6 +2604,23 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             goBack.addCategory(Intent.CATEGORY_HOME);
             startActivity(goBack);
         }
+
+
+//        Toast.makeText(this, "Bye Bye-onBackPressed", Toast.LENGTH_SHORT).show();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mIntent);
+        }
+
+//        Sipdroid.this.finish();
+
+
+
+
+
+
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
@@ -2911,9 +2950,31 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             textToSpeech.shutdown();
         }
 //        mixpanel.flush();
+
+        Toast.makeText(mInstanceActivity, "Destroy", Toast.LENGTH_SHORT).show();
     }
 
     enum NFCDataType {
         TEXTTYPE, URL, NONE
     }
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+//        Toast.makeText(this, "Bye Bye-onSaveInstanceState", Toast.LENGTH_SHORT).show();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mIntent);
+        }
+
+//        Sipdroid.this.finish();
+
+    }
+
+
+
 }

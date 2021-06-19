@@ -23,7 +23,7 @@
         android:name="android.hardware.location.gps"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.USE_SIP" />
     <uses-permission android:name="android.permission.CONFIGURE_SIP" />
@@ -32,7 +32,8 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -46,50 +47,44 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <!--<uses-permission android:name="android.permission.BLUETOOTH" />-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.BLUETOOTH" /> -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <!--<uses-permission android:name="android.permission.READ_CALL_LOG" />-->
-    <!--<uses-permission android:name="android.permission.WRITE_CALL_LOG" />-->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" /> <!-- <uses-permission android:name="android.permission.READ_CALL_LOG" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_CALL_LOG" /> -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+    <uses-permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"
+    <uses-permission
+        android:name="android.permission.CLEAR_APP_CACHE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.sd.carc.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!--<uses-permission android:name="android.permission.BLUETOOTH"/>-->
-    <!--<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>-->
-    <!--<uses-permission android:name="android.permission.RECEIVE_SMS"/>-->
-    <!--<uses-permission android:name="android.permission.READ_SMS" />-->
-    <!--<uses-permission android:name="android.permission.SEND_SMS"/>-->
-
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- <uses-permission android:name="android.permission.BLUETOOTH"/> -->
+    <!-- <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/> -->
+    <!-- <uses-permission android:name="android.permission.RECEIVE_SMS"/> -->
+    <!-- <uses-permission android:name="android.permission.READ_SMS" /> -->
+    <!-- <uses-permission android:name="android.permission.SEND_SMS"/> -->
     <permission
         android:name="com.sd.carc.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-
-
     <application
-        android:name="com.sd.carc.CampusDisclosureApp"
+        android:name=".CampusDisclosureApp"
+        android:allowBackup="true"
         android:allowClearUserData="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:uiOptions="splitActionBarWhenNarrow"
-        android:allowBackup="true"
         android:usesCleartextTraffic="true">
+        <activity android:name=".SelectLocPermission"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -102,31 +97,31 @@
             android:resource="@xml/global_tracker" />
 
         <activity
-            android:name="com.sd.carc.SplashScreen"
+            android:name=".SplashScreen"
             android:launchMode="singleTop"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sd.carc.Sipdroid"
+            android:name=".Sipdroid"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.sd.carc.PUMWebviewActivity"
+            android:name=".PUMWebviewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name="barcodescanner.ScannerActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -139,9 +134,9 @@
         </activity>
         <activity
             android:name="youtubeplayer.YoutubePlayerFullScreen"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -159,22 +154,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sd.carc.MainAlertScreen"
+            android:name=".MainAlertScreen"
             android:label="@string/app_name"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name=".MainAlertScreen" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sd.carc.AlertDialogScreen"
-            android:theme="@style/AppTheme"/>
-        <activity android:name="media.VideoPlayer"/>
-        <activity android:name="media.AudioRecordActivity"/>
+            android:name=".AlertDialogScreen"
+            android:theme="@style/AppTheme" />
+        <activity android:name="media.VideoPlayer" />
+        <activity android:name="media.AudioRecordActivity" />
 
         <receiver
-            android:name="com.sd.carc.GCMBroadcastReceiver"
+            android:name=".GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND"
             android:process=":remote">
             <intent-filter>
@@ -183,63 +179,51 @@
 
                 <category android:name="com.sd.carc" />
             </intent-filter>
-        </receiver>
-
-
-        <!-- Firebase Notifications -->
-        <service android:name="firebase.MyFirebaseMessagingService"
+        </receiver> <!-- Firebase Notifications -->
+        <service
+            android:name="firebase.MyFirebaseMessagingService"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-<!--        <service android:name="firebase.MyFirebaseInstanceIDService"-->
-<!--            tools:ignore="ExportedService">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        </service> <!-- <service android:name="firebase.MyFirebaseInstanceIDService" -->
+        <!-- tools:ignore="ExportedService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <!-- ./Firebase Notifications -->
-
-        <service android:name="com.sd.carc.GCMIntentService_GCM" />
+        <service android:name=".GCMIntentService_GCM" />
         <service android:name="beacons.BeaconRangingActivity" />
         <service android:name="beacons.BeaconMonitoringActivity" />
         <service android:name="geofences.GeofenceTransitionsIntentService" />
         <service
             android:name="services.StickyService"
             android:stopWithTask="false" />
-
         <service
             android:name="services.NetworkSchedulerService"
             android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
-        
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name="services.LocationUpdatesIntentService"
             android:exported="false" />
 
-        <receiver android:name="services.receivers.LocationUpdatesBroadcastReceiver"
+        <receiver
+            android:name="services.receivers.LocationUpdatesBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="services.receivers.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
             </intent-filter>
         </receiver>
-        
         <receiver
-            android:name="com.sd.carc.HomeBroadcast"
+            android:name=".HomeBroadcast"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                <action
+                    android:name="android.net.conn.CONNECTIVITY_CHANGE"
                     tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
-
-        <!--<receiver android:name="services.receivers.SMSReceiver" >-->
-        <!--<intent-filter android:priority="999" >-->
-            <!--<action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-
     </application>
+
 </manifest>
