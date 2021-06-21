@@ -23,7 +23,7 @@ public class SelectLocPermission extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
 
         //Setting message manually and performing action on button click
-        builder.setMessage("Showing Popup Correctly onBackPressed")
+        builder.setMessage("This App requires your permission to track your location at all times. Request you to use Settings on your device to set location permission for your App to \"Allow all the time\".")
                 .setCancelable(false)
                 .setPositiveButton("Setting", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

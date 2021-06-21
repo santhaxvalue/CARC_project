@@ -249,6 +249,10 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         try {
             //requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -382,6 +386,15 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             System.out.println("exception from asist :----------------->");
             e.printStackTrace();
         }
+
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+//            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(mIntent);
+//        }
+
     }
 
 
@@ -1937,12 +1950,14 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         //new code
         pnConfiguration.setSubscribeKey(subscribeKey);
         pnConfiguration.setPublishKey(publishKey);
-        pnConfiguration.setUuid(userId);
+//        pnConfiguration.setUuid(userId);
+        pnConfiguration.setUuid("carc1");
 
         PubNub pubnub = new PubNub(pnConfiguration);
 
 
-        final String channelName = userId;
+//        final String channelName = userId;
+        final String channelName = "carc1";
 
         // create message payload using Gson
         final JsonObject messageJsonObject = new JsonObject();
@@ -2965,11 +2980,11 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
 
 //        Toast.makeText(this, "Bye Bye-onSaveInstanceState", Toast.LENGTH_SHORT).show();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
-            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(mIntent);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+//            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(mIntent);
+//        }
 
 //        Sipdroid.this.finish();
 
