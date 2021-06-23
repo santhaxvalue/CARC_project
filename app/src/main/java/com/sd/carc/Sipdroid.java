@@ -1,5 +1,6 @@
 package com.sd.carc;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -47,6 +48,7 @@ import android.speech.tts.TextToSpeech;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -250,6 +252,7 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d("onetest:","Sipdroid");
 
 
 
@@ -2623,13 +2626,44 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
 
 //        Toast.makeText(this, "Bye Bye-onBackPressed", Toast.LENGTH_SHORT).show();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
-            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(mIntent);
-        }
+//        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            boolean shouldProvideRationale =
+//                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                            Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+//
+//            if(shouldProvideRationale) {
 
+                    Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(mIntent);
+//                }
+
+                Sipdroid.this.finish();
+            }
+
+//        }catch (NullPointerException e){
+//
+//        }
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+//            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(mIntent);
+//        }
+//
 //        Sipdroid.this.finish();
+
+//        try {
+//            boolean backgroundone = ActivityCompat.checkSelfPermission(Sipdroid.this,
+//                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
+//            Toast.makeText(mInstanceActivity, "backgournd2: " +backgroundone, Toast.LENGTH_SHORT).show();
+//        }catch (NullPointerException e){
+//            Toast.makeText(mInstanceActivity, "backgournd2: Null Exception", Toast.LENGTH_SHORT).show();
+//        }
+
+
 
 
 
@@ -2967,6 +3001,28 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
 //        mixpanel.flush();
 
         Toast.makeText(mInstanceActivity, "Destroy", Toast.LENGTH_SHORT).show();
+
+
+//        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                boolean shouldProvideRationale =
+//                        ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+//
+//                if(shouldProvideRationale) {
+
+                    Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(mIntent);
+//                }
+
+                Sipdroid.this.finish();
+            }
+
+//        }catch (NullPointerException e){
+//
+//        }
+
     }
 
     enum NFCDataType {
