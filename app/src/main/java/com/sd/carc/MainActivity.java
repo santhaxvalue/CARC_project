@@ -234,28 +234,71 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
             }
         }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-        if (canMakeSmores()) {
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                boolean statusone = (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-                if(!statusone){
-                    if(Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+                if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED){
+//                    if (canMakeSmores()) {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                            boolean statusone = (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
+//                            if(!statusone){
+//                                if(Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+//
+//
+//                                    Intent intent = new Intent();
+//                                    intent.setAction(
+//                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                                    Uri uri = Uri.fromParts("package",
+//                                            BuildConfig.APPLICATION_ID, null);
+//                                    intent.setData(uri);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+//                                }
+//
+//                            }else {
+//                                return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
+//                            }
+//                        }
+//                    }
 
 
-                        Intent intent = new Intent();
-                        intent.setAction(
-                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package",
-                                BuildConfig.APPLICATION_ID, null);
-                        intent.setData(uri);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
+                        Intent mIntent = new Intent(MainActivity.this, SelectLocPermission.class);
+                        mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(mIntent);
+
                     }
 
+
                 }else {
-                    return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
+//                    Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
+
                 }
             }
-        }
+
+//        if (canMakeSmores()) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                boolean statusone = (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
+//                if(!statusone){
+//                    if(Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+//
+//
+//                        Intent intent = new Intent();
+//                        intent.setAction(
+//                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                        Uri uri = Uri.fromParts("package",
+//                                BuildConfig.APPLICATION_ID, null);
+//                        intent.setData(uri);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                    }
+//
+//                }else {
+//                    return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
+//                }
+//            }
+//        }
 
         }
         return true;
@@ -740,8 +783,11 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
     public void onBackPressed() {
         super.onBackPressed();
 
-//        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED){
+                //        try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //                boolean shouldProvideRationale =
 //                        ActivityCompat.shouldShowRequestPermissionRationale(this,
 //                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
@@ -753,7 +799,32 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
                     startActivity(mIntent);
 //                }
 
+                }
+
+//        }catch (NullPointerException e){
+//
+//        }
+
+            }else {
+//                Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
+
             }
+        }
+
+//        try {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                boolean shouldProvideRationale =
+//                        ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+//
+//                if(shouldProvideRationale) {
+
+//                    Intent mIntent = new Intent(MainActivity.this, SelectLocPermission.class);
+//                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    startActivity(mIntent);
+//                }
+
+//            }
 
 //        }catch (NullPointerException e){
 //

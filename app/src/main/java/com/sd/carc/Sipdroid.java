@@ -2626,21 +2626,56 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
 
 //        Toast.makeText(this, "Bye Bye-onBackPressed", Toast.LENGTH_SHORT).show();
 
-//        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//            boolean shouldProvideRationale =
-//                    ActivityCompat.shouldShowRequestPermissionRationale(this,
-//                            Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED){
+                //        try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                boolean shouldProvideRationale =
+//                        ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
 //
-//            if(shouldProvideRationale) {
+//                if(shouldProvideRationale) {
 
                     Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
                     mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(mIntent);
 //                }
 
-                Sipdroid.this.finish();
+                    Sipdroid.this.finish();
+
+                }
+
+//        }catch (NullPointerException e){
+//
+//        }
+
+            }else {
+//                Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
+
             }
+        }
+
+
+
+//        try {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            boolean shouldProvideRationale =
+//                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                            Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+//
+//            if(shouldProvideRationale) {
+
+//                    Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+//                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    startActivity(mIntent);
+//                }
+
+//                Sipdroid.this.finish();
+//            }
 
 //        }catch (NullPointerException e){
 //
@@ -3002,9 +3037,11 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
 
         Toast.makeText(mInstanceActivity, "Destroy", Toast.LENGTH_SHORT).show();
 
-
-//        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED){
+                //        try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //                boolean shouldProvideRationale =
 //                        ActivityCompat.shouldShowRequestPermissionRationale(this,
 //                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
@@ -3016,8 +3053,36 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
                     startActivity(mIntent);
 //                }
 
-                Sipdroid.this.finish();
+                    Sipdroid.this.finish();
+
+                }
+
+//        }catch (NullPointerException e){
+//
+//        }
+
+            }else {
+//                Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
+
             }
+        }
+
+
+//        try {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                boolean shouldProvideRationale =
+//                        ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+//
+//                if(shouldProvideRationale) {
+
+//                    Intent mIntent = new Intent(Sipdroid.this, SelectLocPermission.class);
+//                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    startActivity(mIntent);
+//                }
+
+//                Sipdroid.this.finish();
+//            }
 
 //        }catch (NullPointerException e){
 //
