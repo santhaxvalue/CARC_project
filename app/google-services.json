@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "752707659644-tm8qvrik9upbb9dr61pv4gff48l1987g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.get2it.dwpbeta",
+            "certificate_hash": "a62c60f61888eede44bd32fcb920a49f34d075a4"
+          }
+        },
+        {
           "client_id": "752707659644-q5lrhicpmrm88fo95jkc1u2nifgobvh0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -32,10 +40,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -68,10 +76,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -104,10 +112,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -140,10 +148,46 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752707659644:android:893cf7a88790e702c526f9",
+        "android_client_info": {
+          "package_name": "com.nequality.safe4all"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752707659644-q5lrhicpmrm88fo95jkc1u2nifgobvh0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKMlvExQ3ghAwilECJaq-tvReO8jAq3XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752707659644-em7i5j4dfaaqjt1i7jk8ert4hdaicsdg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -176,10 +220,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -212,10 +256,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -230,6 +274,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "752707659644-a66toj8g22tfcr8o2qhn3ivbme1j44a9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sd.carc",
+            "certificate_hash": "0aaa0b5a2dcd186dfc7c9124d17ceb1496d80c41"
+          }
+        },
+        {
+          "client_id": "752707659644-lnuftjmqcvuqrpq22evhei61ssr8fb26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sd.carc",
+            "certificate_hash": "762bed612f77433cf5427963c223337e9f653246"
+          }
+        },
         {
           "client_id": "752707659644-q5lrhicpmrm88fo95jkc1u2nifgobvh0.apps.googleusercontent.com",
           "client_type": 3
@@ -248,10 +308,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -284,10 +344,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -320,10 +380,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]
@@ -356,10 +416,10 @@
               "client_type": 3
             },
             {
-              "client_id": "752707659644-ii1q3neb9uerfjvasts39tu76dld08s6.apps.googleusercontent.com",
+              "client_id": "752707659644-2nk1tmgjo2c3d95v97oca0302g2prljt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.get2it.safe4all"
+                "bundle_id": "com.get2it.dwpbeta"
               }
             }
           ]

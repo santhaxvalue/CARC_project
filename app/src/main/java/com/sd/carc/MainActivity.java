@@ -138,25 +138,90 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
 //            }
             //new code
 
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
+
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
+                            Intent mIntent = new Intent(MainActivity.this, SelectLocPermission.class);
+                            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(mIntent);
+
+                        }
+
+
+                    } else {
+//                    Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+            }
         }
     }
 
     //add required permissions
     public void addPermissions(){
 
-        permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
-        permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-        //new code
-        permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-        //new code
-        permissions.add(android.Manifest.permission.CAMERA);
-        permissions.add(android.Manifest.permission.CALL_PHONE);
-        permissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        permissions.add(Manifest.permission.READ_SMS);
-        permissions.add(Manifest.permission.BROADCAST_SMS);
-        permissions.add(Manifest.permission.RECEIVE_SMS);
-        permissions.add(Manifest.permission.SEND_SMS);
+//        permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+//        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+//        permissions.add(Manifest.permission.CAMERA);
+//        permissions.add(Manifest.permission.CALL_PHONE);
+//        permissions.add(Manifest.permission.RECORD_AUDIO);
+//        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+
+//        permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+//        permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+//        //new code
+//        permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+//        //new code
+//        permissions.add(android.Manifest.permission.CAMERA);
+//        permissions.add(android.Manifest.permission.CALL_PHONE);
+//        permissions.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+//        permissions.add(Manifest.permission.READ_SMS);
+//        permissions.add(Manifest.permission.BROADCAST_SMS);
+//        permissions.add(Manifest.permission.RECEIVE_SMS);
+//        permissions.add(Manifest.permission.SEND_SMS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+//            permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+//            permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            permissions.add(Manifest.permission.CAMERA);
+            permissions.add(Manifest.permission.CALL_PHONE);
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            permissions.add(Manifest.permission.READ_SMS);
+            permissions.add(Manifest.permission.BROADCAST_SMS);
+            permissions.add(Manifest.permission.RECEIVE_SMS);
+            permissions.add(Manifest.permission.SEND_SMS);
+
+        }else {
+            permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+            permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            permissions.add(Manifest.permission.CAMERA);
+            permissions.add(Manifest.permission.CALL_PHONE);
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            permissions.add(Manifest.permission.READ_SMS);
+            permissions.add(Manifest.permission.BROADCAST_SMS);
+            permissions.add(Manifest.permission.RECEIVE_SMS);
+            permissions.add(Manifest.permission.SEND_SMS);
+
+        }
+
+
+
     }
 
     public static MainActivity getmInstanceActivity() {
@@ -189,13 +254,20 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
         };
     }
 
-    private void startTheApp() {
-        Intent startIntent = new Intent(context, Sipdroid.class);
-        startIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startIntent);
-        finish();
-    }
+//    private void startTheApp() {
+//        Intent startIntent = new Intent(context, Sipdroid.class);
+//        startIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+//                Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(startIntent);
+//        finish();
+//    }
+public void startTheApp(Class className) {
+    Intent startIntent = new Intent(context, className);
+    startIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+            Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(startIntent);
+    finish();
+}
 
     /******** newly added methods **********/
     private ArrayList findUnAskedPermissions(ArrayList wanted) {
@@ -211,99 +283,14 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
     }
 
     private boolean hasPermission(Object permission) {
-        //old code
 
-//        if (canMakeSmores()) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-//            }
-//        }
-//
-//        return true;
-
-        //old code
-
-        //new code
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-
-            if (canMakeSmores()) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-                }
-            }
-        }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
-
+        if (canMakeSmores()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED){
-//                    if (canMakeSmores()) {
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                            boolean statusone = (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-//                            if(!statusone){
-//                                if(Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
-//
-//
-//                                    Intent intent = new Intent();
-//                                    intent.setAction(
-//                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//                                    Uri uri = Uri.fromParts("package",
-//                                            BuildConfig.APPLICATION_ID, null);
-//                                    intent.setData(uri);
-//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                    startActivity(intent);
-//                                }
-//
-//                            }else {
-//                                return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-//                            }
-//                        }
-//                    }
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-                        Intent mIntent = new Intent(MainActivity.this, SelectLocPermission.class);
-                        mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(mIntent);
-
-                    }
-
-
-                }else {
-//                    Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
-
-                }
+                return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
             }
-
-//        if (canMakeSmores()) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                boolean statusone = (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-//                if(!statusone){
-//                    if(Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
-//
-//
-//                        Intent intent = new Intent();
-//                        intent.setAction(
-//                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//                        Uri uri = Uri.fromParts("package",
-//                                BuildConfig.APPLICATION_ID, null);
-//                        intent.setData(uri);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
-//                    }
-//
-//                }else {
-//                    return (checkSelfPermission((String) permission) == PackageManager.PERMISSION_GRANTED);
-//                }
-//            }
-//        }
-
         }
-        return true;
 
-        //new code
+        return true;
 
     }
 
@@ -652,34 +639,26 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
 
             case ALL_PERMISSIONS_RESULT:
 
-//                Toast.makeText(context, "permissionRequest : --1", Toast.LENGTH_SHORT).show();
-
                 for (Object perms : permissionsToRequest) {
-//                    Toast.makeText(context, "permissionRequest : --2", Toast.LENGTH_SHORT).show();
 
                     if (!hasPermission(perms)) {
-//                        Toast.makeText(context, "permissionRequest : --3", Toast.LENGTH_SHORT).show();
 
                         permissionsRejected.add(perms);
                     }
                 }
 
                 if (permissionsRejected.size() > 0) {
-//                    Toast.makeText(context, "permissionRequest : --4", Toast.LENGTH_SHORT).show();
 
 
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                        Toast.makeText(context, "permissionRequest : --5", Toast.LENGTH_SHORT).show();
 
                         if (shouldShowRequestPermissionRationale((String) permissionsRejected.get(0))) {
-//                            Toast.makeText(context, "permissionRequest : --6", Toast.LENGTH_SHORT).show();
 
                             showMessageOKCancel(
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-//                                            Toast.makeText(context, "permissionRequest : --7", Toast.LENGTH_SHORT).show();
 
                                             requestPermissions((String[]) permissionsRejected.toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
                                         }
@@ -693,7 +672,7 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
                 break;
 
 
-                //new code
+            //new code
 //            case WRITE_EXTERNAL_STORAGE_CODE:
 //
 //                //if request is cancelled, the result arrays are empty
@@ -779,63 +758,4 @@ public class MainActivity extends Activity implements AppConstants, GoogleApiCli
         appStarted, appEntersForeground, appEntersBackground, appClosed
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED){
-                //        try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                boolean shouldProvideRationale =
-//                        ActivityCompat.shouldShowRequestPermissionRationale(this,
-//                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-//
-//                if(shouldProvideRationale) {
-
-                    Intent mIntent = new Intent(MainActivity.this, SelectLocPermission.class);
-                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(mIntent);
-//                }
-
-                }
-
-//        }catch (NullPointerException e){
-//
-//        }
-
-            }else {
-//                Toast.makeText(MainActivity.this, "Allow All Time: False", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-
-//        try {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                boolean shouldProvideRationale =
-//                        ActivityCompat.shouldShowRequestPermissionRationale(this,
-//                                Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-//
-//                if(shouldProvideRationale) {
-
-//                    Intent mIntent = new Intent(MainActivity.this, SelectLocPermission.class);
-//                    mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    startActivity(mIntent);
-//                }
-
-//            }
-
-//        }catch (NullPointerException e){
-//
-//        }
-
-//        try {
-//            boolean backgroundone = ActivityCompat.checkSelfPermission(MainActivity.this,
-//                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
-//            Toast.makeText(mInstanceActivity, "backgournd1: " +backgroundone, Toast.LENGTH_SHORT).show();
-//        }catch (NullPointerException e){
-//            Toast.makeText(mInstanceActivity, "backgournd1: Null Exception", Toast.LENGTH_SHORT).show();
-//        }
-    }
 }

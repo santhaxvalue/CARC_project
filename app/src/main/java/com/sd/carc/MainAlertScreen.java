@@ -39,13 +39,32 @@ public class MainAlertScreen extends MainActivity {
 
     }
 
-    private void startTheApp() {
-        Intent startIntent = new Intent(context, Sipdroid.class);
-        startIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startIntent);
-        finish();
+    private void loadApp(String esoAndMsgTxt, Class activityToStart, boolean isPrimary) {
+//        if (isPrimary && Sipdroid.browser != null) {
+//            //Sipdroid.browser.setVisibility(View.VISIBLE);
+////            Webview.browser.setVisibility(View.GONE);
+//            Sipdroid.loadURL("javascript:onNtfnOpen('" + esoAndMsgTxt + "')");
+//            finish();
+//        } else if(!isPrimary && Webview.browser != null) {
+////            Sipdroid.browser.setVisibility(View.GONE);
+//            //Webview.browser.setVisibility(View.VISIBLE);
+//            Webview.loadURL("javascript:onNtfnOpen('" + esoAndMsgTxt + "')");
+//            finish();
+//        } else {
+//            if (!srvObjectReference.isEmpty())
+//                iawMain.setESO(srvObjectReference);
+
+        startTheApp(activityToStart);
+//        }
     }
+
+//    private void startTheApp() {
+//        Intent startIntent = new Intent(context, Sipdroid.class);
+//        startIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP |
+//                Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(startIntent);
+//        finish();
+//    }
 
     Runnable push = new Runnable() {
         @Override
@@ -79,7 +98,9 @@ public class MainAlertScreen extends MainActivity {
                         if (!srvObjectReference.isEmpty())
                             iawMain.setESO(srvObjectReference);
 
-                        startTheApp();
+//                        startTheApp();
+                        loadApp(esoAndMsgTxt, Sipdroid.class, true);
+
                     }
                 }
                 break;
