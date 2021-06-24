@@ -1193,7 +1193,12 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             String publishKeystr = publishKey;
             String subscribeKeystr = subscribeKey;
 
-            pubNubPublishMethod(userIdstr,publishKeystr,subscribeKeystr);
+            @SuppressLint("WrongConstant") SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_APPEND);
+            String pubnubusername = sh.getString("nameoftheuser", "");
+
+            Log.d("pubnubusername-To: ","pubnubusername-To: "+pubnubusername);
+
+            pubNubPublishMethod(pubnubusername,publishKeystr,subscribeKeystr);
 
         }
 
@@ -1216,6 +1221,14 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
             editor = preferences.edit();
             editor.putString("USER_DETAILS", userDetails);
             editor.commit();
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+            myEdit.putString("nameoftheuser", userDetails);
+            Log.d("pubnubusername-from: ","pubnubusername-from: "+userDetails);
+            myEdit.commit();
+
+
+
         }
 
 
@@ -1940,7 +1953,7 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         }
     }
 
-    private void pubNubPublishMethod(String userId,String publishKey,String subscribeKey) {
+    private void pubNubPublishMethod(String pubnubusernamestr,String publishKey,String subscribeKey) {
 
 
         PNConfiguration pnConfiguration = new PNConfiguration();
@@ -1953,14 +1966,18 @@ public class Sipdroid extends MainActivity implements DialogInterface.OnDismissL
         //new code
         pnConfiguration.setSubscribeKey(subscribeKey);
         pnConfiguration.setPublishKey(publishKey);
-//        pnConfiguration.setUuid(userId);
-        pnConfiguration.setUuid("carc1");
+        pnConfiguration.setUuid(pubnubusernamestr);
+//        pnConfiguration.setUuid("carc1");
+
+        Log.d("pubnubusername-1: ","pubnubusername-1: "+pubnubusernamestr);
 
         PubNub pubnub = new PubNub(pnConfiguration);
 
 
-//        final String channelName = userId;
-        final String channelName = "carc1";
+        final String channelName = pubnubusernamestr;
+//        final String channelName = "carc1";
+
+        Log.d("pubnubusername-2: ","pubnubusername-2: "+pubnubusernamestr);
 
         // create message payload using Gson
         final JsonObject messageJsonObject = new JsonObject();
